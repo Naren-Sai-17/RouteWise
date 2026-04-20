@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>RouteWise AI</title>
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<header class="topbar">
+			<a class="brand" href="/agentic-trip-planner" aria-label="RouteWise AI home">
+				<span class="brand-mark">R</span>
+				<span>
+					<strong>RouteWise AI</strong>
+					<small>Travel intelligence</small>
+				</span>
+			</a>
+			<div id="health-pill" class="health-pill">Checking configuration</div>
+		</header>
+
+		<main class="app-shell">
+			<section class="chat-column" aria-label="RouteWise chat">
+				<div id="chat-log" class="chat-log">
+					<div id="empty-chat" class="empty-chat">Start a trip request below.</div>
+
+					<article id="assistant-turn" class="message assistant hidden">
+						<div class="avatar">AI</div>
+						<div class="message-body">
+							<p class="message-kicker">Assistant</p>
+							<div id="assistant-message" class="bubble assistant-message"></div>
+						</div>
+					</article>
+
+					<article id="result-turn" class="message assistant result-turn hidden">
+						<div class="avatar">R</div>
+						<div class="message-body">
+							<p class="message-kicker">Trip workspace</p>
+							<section class="result-stack" aria-label="Generated trip">
+								<section class="trip-card">
+									<div class="trip-copy">
+										<p class="section-label">Trip Plan</p>
+										<h1 id="trip-title">RouteWise trip plan</h1>
+										<p id="trip-summary">Your generated trip will appear here.</p>
+									</div>
+									<div class="route-chip" aria-label="Route">
+										<span id="origin-code">ORIGIN</span>
+										<i></i>
+										<span id="destination-code">DEST</span>
+									</div>
+								</section>
+
+								<section id="missing-box" class="missing-box hidden"></section>
+								<section id="metrics" class="metrics"></section>
+
+								<div class="widget-grid">
+									<section id="hotel-panel" class="widget hidden">
+										<div class="widget-header">
+											<h2>Stay Options</h2>
+											<span>Hotels</span>
+										</div>
+										<div id="hotel-suggestions" class="card-list"></div>
+									</section>
+
+									<section id="places-panel" class="widget hidden">
+										<div class="widget-header">
+											<h2>Place Shortlist</h2>
+											<span>Stops</span>
+										</div>
+										<div id="place-shortlist" class="place-list"></div>
+									</section>
+
+									<section class="widget">
+										<div class="widget-header">
+											<h2>Flight Desk</h2>
+											<span>Flights</span>
+										</div>
+										<p id="flight-message" class="muted">No live flight cards yet.</p>
+										<div id="flight-meta" class="flight-meta"></div>
+										<div id="flight-calendar" class="calendar-list"></div>
+										<div id="flight-cards" class="card-list"></div>
+									</section>
+
+									<section class="widget itinerary-widget">
+										<div class="widget-header">
+											<h2>Day Plan</h2>
+											<span>Itinerary</span>
+										</div>
+										<div id="itinerary" class="card-list">
+											<div class="empty-state">The itinerary will appear after the first request.</div>
+										</div>
+									</section>
+								</div>
+
+								<section id="budget-panel" class="widget budget-widget hidden">
+									<div class="widget-header">
+										<h2>Budget Notes</h2>
+										<span>Context</span>
+									</div>
+									<p id="budget-notes" class="muted"></p>
+								</section>
+							</section>
+						</div>
+					</article>
+				</div>
+
+				<div id="error-box" class="error-box hidden"></div>
+
+				<section class="composer-wrap">
+					<form id="trip-form" class="composer">
+						<label for="trip-prompt">Message</label>
+						<div class="input-shell">
+							<textarea id="trip-prompt" rows="2" placeholder="Ask RouteWise to plan a trip with destination, dates, travelers, budget, and preferences."></textarea>
+							<button id="run-button" type="submit">Send</button>
+						</div>
+					</form>
+
+					<form id="edit-form" class="edit-form hidden">
+						<label for="edit-prompt">Edit</label>
+						<div class="input-shell compact">
+							<input id="edit-prompt" placeholder="Make day 2 slower and add museums" disabled />
+							<button id="edit-button" type="submit" disabled>Apply</button>
+						</div>
+					</form>
+				</section>
+			</section>
+
+			<aside class="side-panel" aria-label="Agents and reasoning">
+				<section class="agent-rail">
+					<div class="side-heading">
+						<h2>Agent Crew</h2>
+						<span>Live</span>
+					</div>
+					<div class="agent-card" data-agent="central_agent">
+						<div class="agent-icon">C</div>
+						<div>
+							<strong>Central</strong>
+							<span>Intent and route</span>
+						</div>
+						<em>Idle</em>
+					</div>
+					<div class="agent-card" data-agent="flight_desk_agent">
+						<div class="agent-icon">F</div>
+						<div>
+							<strong>Flight Desk</strong>
+							<span>Tool checks</span>
+						</div>
+						<em>Idle</em>
+					</div>
+					<div class="agent-card" data-agent="day_plan_agent">
+						<div class="agent-icon">D</div>
+						<div>
+							<strong>Day Plan</strong>
+							<span>Itinerary</span>
+						</div>
+						<em>Idle</em>
+					</div>
+					<div class="agent-card" data-agent="edit_agent">
+						<div class="agent-icon">E</div>
+						<div>
+							<strong>Edit</strong>
+							<span>Revision</span>
+						</div>
+						<em>Idle</em>
+					</div>
+				</section>
+
+				<section class="reasoning-panel">
+					<div class="side-heading">
+						<h2>Reasoning</h2>
+						<span>Trace</span>
+					</div>
+					<div id="timeline" class="timeline">
+						<div class="empty-state">Waiting for agent activity.</div>
+					</div>
+				</section>
+			</aside>
+		</main>
+
+		<script src="/app.js"></script>
+	</body>
+</html>
