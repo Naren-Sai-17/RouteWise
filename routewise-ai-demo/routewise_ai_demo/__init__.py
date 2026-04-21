@@ -1,2 +1,2 @@
-"""RouteWise AI course demo package."""
+"""RouteWise AI package."""
 
