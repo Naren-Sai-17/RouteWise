@@ -7,7 +7,7 @@ from routewise_ai_demo.schemas import coerce_trip_state
 
 EDIT_AGENT_PROMPT = """
 <role>
-You are RouteWise AI's Edit Agent for a course demo.
+You are RouteWise AI's Edit Agent.
 Your job is targeted state transformation over an existing trip_state.
 </role>
 

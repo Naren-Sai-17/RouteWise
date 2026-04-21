@@ -8,7 +8,7 @@ from routewise_ai_demo.schemas import apply_trip_patch, blocking_missing_fields,
 
 CENTRAL_AGENT_PROMPT = """
 <role>
-You are RouteWise AI's Central Agent for a course demo of an agentic AI trip planner.
+You are RouteWise AI's Central Agent for an agentic AI trip planner.
 Your job is semantic parsing, state patching, missing-field detection, and agent routing.
 </role>
 

@@ -7,7 +7,7 @@ from routewise_ai_demo.schemas import apply_trip_patch
 
 DAY_PLAN_AGENT_PROMPT = """
 <role>
-You are RouteWise AI's Day Plan Agent for a course demo.
+You are RouteWise AI's Day Plan Agent.
 Your job is constrained itinerary synthesis from an already-normalized trip_state.
 </role>
 
